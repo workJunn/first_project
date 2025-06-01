@@ -1,12 +1,22 @@
-version: '3.8'
+version: '3'
 # сервис для nginx
 services:
   nginx:
-    image: nginx:latest 
+    image: nginx:latest #latest для последней версии 
     volumes:
-      - ./templates:/etc/nginx/templates
+      - ./:/var/www/
+      - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
     ports:
-      - "8080:80" 
-    environment:
-      - NGINX_HOST=foobar.com
-      - NGINX_PORT=80
+      - "8876:80" # 8876 мой порт (localhost) , 80 внутрений порт nginx
+    depends_on:
+      - app
+    container_name: project_nginx
+
+  app:
+    build: 
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www/
+    container_name: project_app
+      
