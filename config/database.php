@@ -149,14 +149,14 @@ return [
 
         'options' => [
             //this setting is only effective when using a managed redis cluster. No impact if redis cluster is not used.
-            'cluster' => env('REDIS_CLUSTER', 'redis'),
+            'cluster' => 'redis',
         ],
         //connection used by the redis facade
         'default' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
+            'url' => 'http://localhost',
+            'host' => 'redis',
+            'password' => null,
+            'port' => '6379',
             //database set to 0 since only database 0 is supported in redis cluster
             'database' => '0',
             //redis key prefix for this connection
@@ -164,10 +164,10 @@ return [
         ],
         //connection used by the cache facade when redis cache is configured in config/cache.php
         'cache' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
+            'url' => 'http://localhost',
+            'host' => 'redis',
+            'password' => null,
+            'port' => '6379',
             //database set to 0 since only database 0 is supported in redis cluster
             'database' => '0',
             //redis key prefix for this connection
@@ -175,10 +175,10 @@ return [
         ],
         //connection used by the session when redis cache is configured in config/session.php
         'session' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
+            'url' => 'http://localhost',
+            'host' => 'redis',
+            'password' => null,
+            'port' => '6379',
             //database set to 0 since only database 0 is supported in redis cluster
             'database' => '0',
             //redis key prefix for this connection
@@ -186,10 +186,10 @@ return [
         ],
         //connection used by the queue when redis cache is configured in config/queue.php
         'queue' => [
-            'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD'),
-            'port' => env('REDIS_PORT', '6379'),
+            'url' => 'http://localhost',
+            'host' => 'redis',
+            'password' => null,
+            'port' => '6379',
             //database set to 0 since only database 0 is supported in redis cluster
             'database' => '0',
             //redis key prefix for this connection
