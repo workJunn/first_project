@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('CACHE_STORE', 'database'),
+    'default' => env('CACHE_STORE', 'redis'),
 
     /*
     |--------------------------------------------------------------------------
@@ -72,10 +72,11 @@ return [
         ],
 
         'redis' => [
-            'driver' => 'redis',
-            'connection' => env('REDIS_CACHE_CONNECTION', 'cache'),
-            'lock_connection' => env('REDIS_CACHE_LOCK_CONNECTION', 'default'),
-        ],
+                //uses the redis driver from config/database.php
+                'driver' => 'redis',
+                //uses the 'cache' connection from the redis driver in config/database.php
+                'connection' => 'cache',
+            ],
 
         'dynamodb' => [
             'driver' => 'dynamodb',
@@ -103,6 +104,7 @@ return [
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache_'),
-
+    // 'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache_'),
+    //this is the redis cache key prefix applied to all cache keys
+    'prefix' => '',
 ];
