@@ -33,11 +33,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: first_project
-    container_name: postgres_db
+    container_name: project_db
 
   redis:
     image: redis:latest
-    command: redis-server --appendonly
+    command: redis-server --appendonly yes 
     volumes:
     - ./data/redis:/data
     ports:
