@@ -10,7 +10,7 @@ services:
       - "127.0.0.1:8876:80" # 8876 мой порт (localhost) , 80 внутрений порт nginx
     depends_on:
       - app
-    container_name: project_nginx
+    container_name: nginx
 
   app:
     build: 
@@ -20,7 +20,7 @@ services:
       - ./:/var/www/
     depends_on:
       - db
-    container_name: project_app
+    container_name: app
     
   db:
     image: postgres:latest
@@ -28,18 +28,18 @@ services:
     volumes:
       - ./tmp/db:/var/lib/postgres
     # ports:
-    #   - "5432:5432"
+    #   - "127.0.0.1:5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: first_project
-    container_name: project_db
+    container_name: db
 
   redis:
     image: redis:latest
     command: redis-server --appendonly yes 
     volumes:
     - ./data/redis:/data
-    ports:
-      - "127.0.0.1:8002:6379"
-    container_name: project_redis
+    # ports:
+    #   - "127.0.0.1:8002:6379"
+    container_name: redis

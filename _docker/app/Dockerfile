@@ -27,5 +27,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 
 WORKDIR /var/www
 
+
+STOPSIGNAL SIGQUIT
+
 CMD composer install \
-	&& php-fpm
+	&& php-fpm 
