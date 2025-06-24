@@ -1,51 +1,41 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
-class CurrentWeather 
+class CurrentWeather extends Controller 
 {
+    public function index(Request $request) {
 
-    // public function CurrentWeather(Request $request) {
+        $lat = 55.7506;
+        $lon = 37.6175;
 
-    //     #Валидация для безопастности данных
-    //     // $request->validate([
-    //     //     'lat' => 'required|numeric',
-    //     //     'lon' => 'required|numeric',
-    //     // ]);
+        $key = "Weather_{$lat}_{$lon}";
 
-    //     $lat = [];
-    //     $lon = [];
+        $api = "https://api.met.no/weatherapi/locationforecast/2.0/classic?lat={$lat}&lon={$lon}.72&altitude=90";
+        $response = Http::get($api);
+        // dd($response);
+        // print_r($response);
+        echo $response;
 
-    //     $cacheKey = "weather_{$lat}_{$lon}_90";
-
-    //     $weatherData = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($lat, $lon, $altitude) 
-
-    //     $response = Http::get('https://api.met.no/weatherapi/locationforecast/2.0/classic?lat{$}&lon=10.72&altitude=90');
-    //     $statusCode = $response->status();
-    //     $body = $response->body();
-
-    // }
-
-    public function current_weather (Request $request){
-
-        $lat = [];
-        $lon = [];
-
-        $response = Http::get('https://api.met.no/weatherapi/locationforecast/2.0/classic?lat=10&lon=10.72&altitude=90');
-    
         if ($response->successful()) {
-            $products = $response->json();
-            // Process the products
+            $Weather = $response->json();
+            
+            if(cache::has($Weather)){
+                Cache::put($key, $Weather, $seconds = 3600);
+            }
+
+            return $Weather;
+            
         } else {
-            // $statusCode = $response->status();
-            // $errorMessage = $response->body();
+            $statusCode = $response->status();
+            $errorMessage = $response->body();
         }
-
     }
-
-    // 1. Сделать запрос в api 
+    // 1. Сделать запрос в api есть 
     // 2. сделать провеку на наличие данных 
     // 3. Ответ в формате json (P.S. хз как)
     // 4. ответ в кэш (P.S. хз как)
