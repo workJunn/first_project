@@ -21,7 +21,8 @@ class CurrentWeather extends Controller
             return response()->json($Weather);
         }
 
-        $api = "https://api.met.no/weatherapi/locationforecast/2.0/classic?lat={$lat}&lon={$lon}&altitude=90";
+        $api = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat={$lat}&lon={$lon}";
+
         $response = Http::withHeaders([
             'User-Agent' => 'MyWeatherApp/1.0 (your_email@example.com)', 
             'Accept' => 'application/json', // сразу получаем ответ в json формате 
