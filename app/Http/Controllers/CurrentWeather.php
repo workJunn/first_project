@@ -28,12 +28,8 @@ class CurrentWeather extends Controller
             'Accept' => 'application/json', // сразу получаем ответ в json формате 
         ])->get($api);
 
-        // dd($response);
-        // print_r($response);
-        // echo $response;
-
         if ($response->successful()) {
-            $Weather = $response->json();// это переделывает json щтвет в удобный для чтения php - массив 
+            $Weather = $response->json();
 
             Cache::put($key, $Weather, $seconds = 3600);
 

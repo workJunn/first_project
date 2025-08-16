@@ -114,6 +114,15 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'session' => [
+            'driver' => 'pgsql', // или 'pgsql', 'sqlite'
+            'host' => env('SESSION_DB_HOST', '127.0.0.1'),
+            'port' => env('SESSION_DB_PORT', '5432'),
+            'database' => env('SESSION_DB_DATABASE', 'your_session_db'),
+            'username' => env('SESSION_DB_USERNAME', 'your_username'),
+            'password' => env('SESSION_DB_PASSWORD', ''),
+    ],
+
     ],
 
     /*
